@@ -5,5 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PostRepository: CrudRepository<Post, String> {
+interface PostRepository: CrudRepository<Post, Long> {
+
+    fun findByName(name: String): Post?
 }
