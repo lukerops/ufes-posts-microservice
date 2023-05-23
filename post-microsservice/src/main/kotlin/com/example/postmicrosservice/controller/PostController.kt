@@ -12,9 +12,10 @@ import java.net.http.HttpResponse
 class PostController(
     private val postService: PostService
 ) {
-
-    @GetMapping("/get/{id}")
-    fun get(@PathVariable id: Long): Post? =
-        postService.getPost(id)
-
+    @GetMapping("/{id}")
+    fun get(@PathVariable id: Long): ResponseEntity<Post> {
+        val data = postService.getPost(id)
+        return if (data != null) ResponseEntity<Post>(data, HttpStatus.OK)
+        else ResponseEntity<Post>(data, HttpStatus.NOT_FOUND)
+    }
 }
