@@ -13,15 +13,18 @@ class PostController(
     @PostMapping("/create")
     fun create(post: Post){
         postService.createPost(post)
+        return ResponseEntity(HttpStatus.CREATED)
     }
 
-    @PutMapping("/update/{id}")
-    fun update(@PathVariable id: Long, post: Post){
-        postService.updatePost(id, post)
+    @PutMapping("/update")
+    fun update(post: Post){
+        postService.updatePost(post)
+        return ResponseEntity(HttpStatus.OK)
     }
         
-    @DeleteMapping("/delete/{id}")
-    fun delete(@PathVariable id: Long){
-        postService.deletePost(id)
+    @DeleteMapping("/delete")
+    fun delete(post: Post){
+        postService.deletePost(post)
+        return ResponseEntity(HttpStatus.OK)
     }
 }
