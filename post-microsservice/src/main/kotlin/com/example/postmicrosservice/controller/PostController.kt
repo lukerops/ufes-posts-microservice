@@ -1,6 +1,7 @@
 package com.example.postmicrosservice.controller
 
 import com.example.postmicrosservice.service.PostService
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -9,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController
 class PostController(
     private val postService: PostService
 ) {
-    @RequestMapping("/create")
+    @PostMapping("/create")
     fun create(post: Post){
-        postService.create(post)
+        postService.createPost(post)
     }
 
-    @RequestMapping("/update")
-    fun update(post: Post){
-        postService.update(post)
+    @PutMapping("/update/{id}")
+    fun update(@PathVariable id: Long, post: Post){
+        postService.updatePost(id, post)
     }
         
-    @RequestMapping("/delete")
-    fun delete(post: Post){
-        postService.delete(post)
+    @DeleteMapping("/delete/{id}")
+    fun delete(@PathVariable id: Long){
+        postService.deletePost(id)
     }
 }
