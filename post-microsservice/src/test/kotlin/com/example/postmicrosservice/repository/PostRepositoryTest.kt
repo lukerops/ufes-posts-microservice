@@ -11,6 +11,7 @@ import kotlin.random.Random
 
 @SpringBootTest
 class PostRepositoryTest {
+
     @Autowired
     lateinit var postRepository: PostRepository
 
@@ -45,5 +46,21 @@ class PostRepositoryTest {
         val output = postRepository.findAll().toList()
 
         Assertions.assertEquals(listSize, output.size)
+    }
+
+    @Test
+    fun `should return a post by name`() {
+        val name = "Test"
+        val post = PostBuilder().apply {
+            this.name = name
+        }.build()
+
+        postRepository.save(post)
+
+        val output = postRepository.findByName(name)
+
+        Assertions.assertTrue(output != null)
+        Assertions.assertEquals(post.name, output?.name)
+        Assertions.assertEquals(1, output?.id)
     }
 }
