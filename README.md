@@ -7,6 +7,9 @@ API criada na disciplina de microserviços.
  - Java RE >= 18
  - Java Server VM >= 18
 
+## To run locally:
+- On `post-microsservice` folder, run `./gradlew bootRun`
+
 ## How to Build
  - Clone the Repository
  - On `post-microsservice` folder, run `./gradlew build`
