@@ -9,5 +9,18 @@ import org.springframework.web.bind.annotation.RestController
 class PostController(
     private val postService: PostService
 ) {
+    @RequestMapping("/create")
+    fun create(post: Post){
+        postService.create(post)
+    }
 
+    @RequestMapping("/update")
+    fun update(post: Post){
+        postService.update(post)
+    }
+        
+    @RequestMapping("/delete")
+    fun delete(post: Post){
+        postService.delete(post)
+    }
 }
