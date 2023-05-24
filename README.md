@@ -6,6 +6,7 @@ API criada na disciplina de microserviços.
  - Java SDK >= 17
  - Java RE >= 18
  - Java Server VM >= 18
+ - MySQL DB
 
 ## To run locally:
 - On `post-microsservice` folder, run `./gradlew bootRun`
