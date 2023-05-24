@@ -20,4 +20,22 @@ class PostService (
 
     fun getAllPosts(): List<Post> =
         postRepository.findAll().toList()
+
+    fun createPost(post: Post) = savePost(post)
+    fun updatePost(post: Post) : Boolean {
+        if (postRepository.existsById(post.id)) {
+            val safePost = post.copy(id = post.id, name = post.name)
+            savePost(post)
+            return true
+        }
+        return false
+    }
+
+    fun deletePost(id: Long) : Boolean {
+        if (postRepository.existsById(id)) {
+            postRepository.deleteById(id)
+            return true
+        }
+        return false
+    }
 }
