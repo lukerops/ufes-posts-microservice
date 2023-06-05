@@ -8,26 +8,35 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.mock
 import org.mockito.Mock
 import com.example.postmicrosservice.model.PostBuilder
+import com.example.postmicrosservice.service.PostService
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.mockito.InjectMocks
 import org.mockito.Mockito
+import org.springframework.boot.test.mock.mockito.MockBean
 
 @SpringBootTest
 class PostControllerTest {
 
-    @Mock
+    private lateinit var postController: PostController
+
+    @MockBean
     private lateinit var postService: PostService
 
-    @InjectMocks
-    private lateinit var PostController: PostController
-    
+    @BeforeEach
+    fun setup() {
+        postController = PostController(postService)
+    }
+
     @Test
     fun `should create a post`(){
         val post = PostBuilder().build()
 
-        Mockito.`when`(postServie.createPost(post)).thenReturn(post)
+        Mockito.`when`(postService.createPost(post)).thenReturn(post)
 
-        PostController.createPost(post)
+        postController.create(post)
 
-        Mockito.verify(postService, Mockito.times(1).createPost(post))
+        Mockito.verify(postService, Mockito.times(1)).createPost(post)
     }
 
     @Test
@@ -36,19 +45,19 @@ class PostControllerTest {
 
         Mockito.`when`(postService.updatePost(post)).thenReturn(true)
 
-        PostController.update(post)
+        postController.update(post)
 
-        Mockito.verify(postService, Mockito.times(1).updatePost(post))
+        Mockito.verify(postService, Mockito.times(1)).updatePost(post)
     }
 
     @Test
     fun `should delete a post`(){
         val post = PostBuilder().build()
 
-        Mockito.`when`(postService.deletePost(post)).thenReturn(void)
+        Mockito.`when`(postService.deletePost(post.id)).thenReturn(true)
 
-        PostController.delete(post)
+        postController.delete(post.id)
 
-        Mockito.verify(postService, Mockito.times(1).deletePost(post))
+        Mockito.verify(postService, Mockito.times(1)).deletePost(post.id)
     }
 }
