@@ -1,4 +1,13 @@
 package com.example.postmicrosservice.repository
 
-class AuthorRepository {
+import com.example.postmicrosservice.model.Author
+import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
+
+@Repository
+interface AuthorRepository: CrudRepository<Author, Long> {
+    fun findByAuthorId(authorId: Long): Author?
+
+    fun findByPostId(postId: Long): Author?
+
 }
