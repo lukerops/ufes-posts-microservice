@@ -43,8 +43,9 @@ class AuthorRepositoryTest {
 
         var output = authorRepository.findByAuthorId(id)
 
-        Assertions.assertEquals(author.authorId, output?.authorId)
-        Assertions.assertEquals(author.postId, output?.postId)
+        Assertions.assertEquals(1, output.size)
+        Assertions.assertEquals(author.authorId, output.first().authorId)
+        Assertions.assertEquals(author.postId, output.first().postId)
     }
 
     @Test
