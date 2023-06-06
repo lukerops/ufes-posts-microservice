@@ -10,8 +10,8 @@ class MediaService (
     private val mediaRepository: MediaRepository
         ) {
 
-    fun getPostByMedia(mediaId: Long): Post? =
-        mediaRepository.findByMediaId(mediaId)
+    fun getPostByMedia(postId: Long): List<Media> =
+        mediaRepository.findByMediaId(postId)
 
     }
 }
