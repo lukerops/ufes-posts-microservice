@@ -7,6 +7,7 @@ plugins {
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	id("io.freefair.lombok") version "8.0.1"
+	id("org.jlleitschuh.gradle.ktlint") version "11.4.0"
 }
 
 group = "com.example"
