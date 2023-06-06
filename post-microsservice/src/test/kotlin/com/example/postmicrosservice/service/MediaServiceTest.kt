@@ -2,7 +2,11 @@ package com.example.postmicrosservice.service
 
 import com.example.postmicrosservice.model.Post
 import com.example.postmicrosservice.model.PostBuilder
+import com.example.postmicrosservice.model.Media
+import com.example.postmicrosservice.model.MediaBuilder
 import com.example.postmicrosservice.repository.PostRepository
+import com.example.postmicrosservice.repository.MediaRepository
+import com.example.postmicrosservice.service.MediaService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -11,42 +15,47 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import java.util.*
-import javax.management.loading.ClassLoaderRepository
 
 @ExtendWith(MockitoExtension::class)
 class MediaServiceTest {
 
     @Mock
+    private lateinit var postRepository: PostRepository
+
+    @Mock
     private lateinit var mediaRepository: MediaRepository
+
+    @InjectMocks
+    private lateinit var postService: PostService
 
     @InjectMocks
     private lateinit var mediaService: MediaService
 
-
     @Test
-    fun `should return a post when find by mediaId`() {
+    fun `should find a post by mediaId and return it`() {
         val post = PostBuilder().build()
+        val media = MediaBuilder().build()
 
-        Mockito.`when`(postRepository.findByMediaId(post.id)).thenReturn(Optional.of(post))
+        Mockito.`when`(mediaRepository.findByMediaId(media.id)).thenReturn(post)
 
-        val output = postService.getPost(post.id)
+        val output = mediaService.getPostByMedia(media.id)
 
-        Mockito.verify(postRepository, Mockito.times(1)).findByMediaId(post.id)
+        Mockito.verify(mediaRepository, Mockito.times(1)).findByMediaId(media.id)
 
         Assertions.assertTrue(output != null)
-        Assertions.assertEquals(post.id, output!!.id)
-        Assertions.assertEquals(post.name, output.name)
-    }
+        Assertions.assertEquals(media.postId, output!!.id)
+    }    
 
     @Test
     fun `should return null when not found a post by mediaId`() {
-        val id = Random().nextLong()
+        val media = MediaBuilder().build()
 
-        Mockito.`when`(postRepository.findByMediaId(id)).thenReturn(Optional.empty())
+        Mockito.`when`(mediaRepository.findByMediaId(media.id)).thenReturn(null)
 
-        val output = postService.getPost(id)
+        val output = mediaService.getPostByMedia(media.id)
 
-        Mockito.verify(postRepository, Mockito.times(1)).findByMediaId(id)
+        Mockito.verify(mediaRepository, Mockito.times(1)).findByMediaId(media.id)
         Assertions.assertTrue(output == null)
     }
+
 }
