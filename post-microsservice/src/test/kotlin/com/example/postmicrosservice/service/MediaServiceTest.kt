@@ -32,14 +32,11 @@ class MediaServiceTest {
     private lateinit var mediaService: MediaService
 
     @Test
-    fun `should find all medias in a post by postId and return it`() {
-        var id = Random.nextLong()
-        var media = MediaBuilder().apply {
-            postId = id
-        }.build()
-        var medias = listOf(media)
+    fun `should find a post by mediaId and return it`() {
+        val post = PostBuilder().build()
+        val media = MediaBuilder().build()
 
-        Mockito.`when`(mediaRepository.findByMediaId(media.id)).thenReturn(medias)
+        Mockito.`when`(mediaRepository.findByMediaId(media.id)).thenReturn(post)
 
         val output = mediaService.getPostByMedia(media.id)
 
