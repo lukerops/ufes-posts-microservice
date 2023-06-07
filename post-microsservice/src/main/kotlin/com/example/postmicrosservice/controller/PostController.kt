@@ -1,24 +1,40 @@
 package com.example.postmicrosservice.controller
+
 import com.example.postmicrosservice.model.Post
+import com.example.postmicrosservice.model.Media
 import com.example.postmicrosservice.service.PostService
+import com.example.postmicrosservice.service.AuthorService
+import com.example.postmicrosservice.service.MediaService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/post")
 class PostController(
     private val postService: PostService
+    private val authorService: AuthorService
+    private val mediaService: MediaService
 ) {
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long): ResponseEntity<Post> {
         val data = postService.getPost(id)
-        return if (data != null) ResponseEntity<Post>(data, HttpStatus.OK)
-        else ResponseEntity<Post>(data, HttpStatus.NOT_FOUND)
+        return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
     }
+
+    @GetMapping("/{author}")
+    fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<Post> {
+        val data = authorService.getPostByAuthor(authorId)
+        return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+    }
+
+    @GetMapping("/{id}")
+    fun getMediaByPost(@PathVariable id: Long): ResponseEntity<List<Media>> {
+        val data = mediaService.getPostByMedia(id)
+        return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+    }
+
+
     @PostMapping("/create")
     fun create(@RequestBody post: Post) : ResponseEntity<String>{
         postService.createPost(post)
