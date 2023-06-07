@@ -8,10 +8,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MediaRepository: CrudRepository<Media, Long> {
 
-    fun findByMediaId(postId: Long): List<Media>
+    fun findByMediaId(mediaId: Long): Post?
 
     fun findByPostId(postId: Long): Media?
 
 }
-
-
