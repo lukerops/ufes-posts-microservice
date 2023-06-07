@@ -2,13 +2,12 @@ package com.example.postmicrosservice.model
 
 import kotlin.random.Random
 
-class MediaBuilder {
-    var postId = Random.nextLong()
-    var mediaId = Random.nextLong()
+class PostBuilder {
+    var name: String = Random.toString()
 
     fun build() =
-        Media(
-            postId = this.postId,
-            mediaId = this.mediaId
+        Post(
+            id = 0,
+            name = this.name
         )
 }
