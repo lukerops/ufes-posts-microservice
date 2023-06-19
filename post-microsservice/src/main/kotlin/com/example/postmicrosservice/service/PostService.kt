@@ -25,7 +25,7 @@ class PostService(
     fun updatePost(post: Post): Boolean {
         if (postRepository.existsById(post.id)) {
             val safePost = post.copy(id = post.id, name = post.name)
-            savePost(post)
+            savePost(safePost)
             return true
         }
         return false
