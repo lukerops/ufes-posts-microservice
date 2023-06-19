@@ -27,7 +27,7 @@ class AuthorService (
 
     fun updateAuthor(author: Author) : Boolean {
         if (authorRepository.existsById(author.id)) {
-            val safeAuthor = author.copy(id = author.id, postId = author.postId, authorId = author.authorId)
+            val safeAuthor = author.copy(postId = author.postId, authorId = author.authorId)
             saveAuthor(safeAuthor)
             return true
         }
