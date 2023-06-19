@@ -11,5 +11,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 class PostMicrosserviceApplication
 
 fun main(args: Array<String>) {
-	runApplication<PostMicrosserviceApplication>(*args)
+    runApplication<PostMicrosserviceApplication>(*args)
 }
