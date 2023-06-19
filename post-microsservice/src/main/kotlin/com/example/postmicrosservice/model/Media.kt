@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 
 @Entity
-data class Media (
+data class Media(
     @Id
     @GeneratedValue
     val id: Long = 0,

@@ -5,9 +5,9 @@ import com.example.postmicrosservice.repository.PostRepository
 import org.springframework.stereotype.Service
 
 @Service
-class PostService (
+class PostService(
     private val postRepository: PostRepository
-        ) {
+) {
 
     fun savePost(post: Post): Post =
         postRepository.save(post)
@@ -22,16 +22,16 @@ class PostService (
         postRepository.findAll().toList()
 
     fun createPost(post: Post) = savePost(post)
-    fun updatePost(post: Post) : Boolean {
+    fun updatePost(post: Post): Boolean {
         if (postRepository.existsById(post.id)) {
             val safePost = post.copy(id = post.id, name = post.name)
-            savePost(post)
+            savePost(safePost)
             return true
         }
         return false
     }
 
-    fun deletePost(id: Long) : Boolean {
+    fun deletePost(id: Long): Boolean {
         if (postRepository.existsById(id)) {
             postRepository.deleteById(id)
             return true
