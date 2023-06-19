@@ -33,7 +33,7 @@ class MediaServiceTest {
 
     @Test
     fun `should find all medias in a post by postId and return it`() {
-        var id = Random.nextLong()
+        val id = Random().nextLong()
         var media = MediaBuilder().apply {
             postId = id
         }.build()
@@ -46,7 +46,7 @@ class MediaServiceTest {
         Mockito.verify(mediaRepository, Mockito.times(1)).findByMediaId(media.id)
 
         Assertions.assertTrue(output != null)
-        Assertions.assertEquals(media.postId, output!!.id)
+        Assertions.assertEquals(output, medias)
     }    
 
     @Test

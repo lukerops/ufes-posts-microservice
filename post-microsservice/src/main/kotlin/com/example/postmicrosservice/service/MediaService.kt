@@ -12,6 +12,4 @@ class MediaService (
 
     fun getPostByMedia(postId: Long): List<Media> =
         mediaRepository.findByMediaId(postId)
-
     }
-}
