@@ -2,13 +2,13 @@ package com.example.postmicrosservice.model
 
 import kotlin.random.Random
 
-class AuthorBuilder {
+class MediaBuilder {
     var postId = Random.nextLong()
-    var authorId = Random.nextLong()
+    var mediaId = Random.nextLong()
 
-    fun build() = 
-        Author(
+    fun build() =
+        Media(
             postId = this.postId,
-            authorId = this.authorId
-    )
+            mediaId = this.mediaId
+        )
 }
