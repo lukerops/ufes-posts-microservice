@@ -22,7 +22,7 @@ class AuthorControllerTest {
     }
 
     @Test
-    fun `should create a author`(){
+    fun `should create a author`() {
         val author = AuthorBuilder().build()
 
         Mockito.`when`(authorService.createAuthor(author)).thenReturn(author)
@@ -33,7 +33,7 @@ class AuthorControllerTest {
     }
 
     @Test
-    fun `should update a author`(){
+    fun `should update a author`() {
         val author = AuthorBuilder().build()
 
         Mockito.`when`(authorService.updateAuthor(author)).thenReturn(true)
@@ -44,7 +44,7 @@ class AuthorControllerTest {
     }
 
     @Test
-    fun `should delete a author`(){
+    fun `should delete a author`() {
         val author = AuthorBuilder().build()
 
         Mockito.`when`(authorService.deleteAuthor(author.id)).thenReturn(true)
