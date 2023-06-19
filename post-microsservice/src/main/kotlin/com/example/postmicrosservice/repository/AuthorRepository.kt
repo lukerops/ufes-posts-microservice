@@ -5,9 +5,8 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AuthorRepository: CrudRepository<Author, Long> {
+interface AuthorRepository : CrudRepository<Author, Long> {
     fun findByAuthorId(authorId: Long): List<Author>
 
     fun findByPostId(postId: Long): Author?
-
 }

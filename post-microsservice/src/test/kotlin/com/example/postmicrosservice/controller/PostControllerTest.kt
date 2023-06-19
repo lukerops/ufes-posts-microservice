@@ -1,18 +1,11 @@
 package com.example.postmicrosservice.controller
 
-import org.springframework.boot.test.context.SpringBootTest
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verify
-import com.example.postmicrosservice.model.Post
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.mock
-import org.mockito.Mock
 import com.example.postmicrosservice.model.PostBuilder
 import com.example.postmicrosservice.service.PostService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.InjectMocks
 import org.mockito.Mockito
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 
 @SpringBootTest
@@ -29,7 +22,7 @@ class PostControllerTest {
     }
 
     @Test
-    fun `should create a post`(){
+    fun `should create a post`() {
         val post = PostBuilder().build()
 
         Mockito.`when`(postService.createPost(post)).thenReturn(post)
@@ -40,7 +33,7 @@ class PostControllerTest {
     }
 
     @Test
-    fun `should update a post`(){
+    fun `should update a post`() {
         val post = PostBuilder().build()
 
         Mockito.`when`(postService.updatePost(post)).thenReturn(true)
@@ -51,7 +44,7 @@ class PostControllerTest {
     }
 
     @Test
-    fun `should delete a post`(){
+    fun `should delete a post`() {
         val post = PostBuilder().build()
 
         Mockito.`when`(postService.deletePost(post.id)).thenReturn(true)

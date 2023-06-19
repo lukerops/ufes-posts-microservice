@@ -21,7 +21,6 @@ class PostServiceTest {
     @InjectMocks
     private lateinit var postService: PostService
 
-
     @Test
     fun `should return a post when find by id`() {
         val post = PostBuilder().build()
