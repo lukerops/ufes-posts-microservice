@@ -20,10 +20,12 @@ class PostControllerTest {
 
     @MockBean
     private lateinit var postService: PostService
+    private lateinit var authorService: AuthorService
+    private lateinit var mediaService: MediaService
 
     @BeforeEach
     fun setup() {
-        postController = PostController(postService)
+        postController = PostController(postService, authorService, mediaService)
     }
 
     @Test

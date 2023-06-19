@@ -30,7 +30,7 @@ class PostController(
     }
 
     @GetMapping("/author/{author}")
-    fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<Post> {
+    fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<List<Post>> {
         val data = authorService.getPostByAuthor(authorId)
         return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
     }
