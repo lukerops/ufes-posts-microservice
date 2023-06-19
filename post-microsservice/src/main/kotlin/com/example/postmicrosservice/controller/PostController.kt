@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/post")
 class PostController(
-    private val postService: PostService
-    private val authorService: AuthorService
+    private val postService: PostService,
+    private val authorService: AuthorService,
     private val mediaService: MediaService
 ) {
     @GetMapping("/{id}")
