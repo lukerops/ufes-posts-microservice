@@ -60,5 +60,4 @@ class MediaServiceTest {
         Mockito.verify(mediaRepository, Mockito.times(1)).findByMediaId(media.id)
         Assertions.assertTrue(output == null)
     }
-
 }

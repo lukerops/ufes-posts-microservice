@@ -8,7 +8,7 @@ class AuthorBuilder {
 
     fun build() = 
         Author(
-            postId = postId,
-            authorId = authorId
+            postId = this.postId,
+            authorId = this.authorId
     )
 }

@@ -13,5 +13,3 @@ interface MediaRepository: CrudRepository<Media, Long> {
     fun findByPostId(postId: Long): Media?
 
 }
-
-
