@@ -91,8 +91,8 @@ class PostControllerTest {
     fun `should get all posts by author`(){
         var id = Random.nextLong()
 
-        val posts = listOf(AuthorBuilder().apply {
-            postId = id
+        val posts = listOf(PostBuilder().apply {
+            id = id
         }.build())
 
         Mockito.`when`(authorService.getPostByAuthor(id)).thenReturn(posts)
