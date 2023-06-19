@@ -22,13 +22,13 @@ class PostController(
         return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
     }
 
-    @GetMapping("/{author}")
+    @GetMapping("/author/{author}")
     fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<Post> {
         val data = authorService.getPostByAuthor(authorId)
         return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/media/{id}")
     fun getMediaByPost(@PathVariable id: Long): ResponseEntity<List<Media>> {
         val data = mediaService.getPostByMedia(id)
         return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
