@@ -22,7 +22,7 @@ jobs:
 
     - name: Executar os testes
       run: |
-        ./gradlew test
+        cd post-microsservice && ./gradlew test
 # Alterar o build quando terminar o dockerfile
   build:
       needs: test
@@ -42,4 +42,4 @@ jobs:
 
       - name: Fazer o build
         run: |
-          ./gradlew build
+          cd post-microsservice && ./gradlew build

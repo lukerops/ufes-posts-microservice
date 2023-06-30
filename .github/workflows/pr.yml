@@ -22,4 +22,4 @@ jobs:
 
     - name: Executar os testes
       run: |
-        ./gradlew test
+        cd post-microsservice && ./gradlew test
