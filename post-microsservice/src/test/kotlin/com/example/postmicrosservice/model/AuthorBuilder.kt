@@ -6,9 +6,9 @@ class AuthorBuilder {
     var postId = Random.nextLong()
     var authorId = Random.nextLong()
 
-    fun build() = 
+    fun build() =
         Author(
             postId = this.postId,
             authorId = this.authorId
-    )
+        )
 }

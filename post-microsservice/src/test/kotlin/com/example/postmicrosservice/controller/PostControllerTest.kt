@@ -1,11 +1,10 @@
 package com.example.postmicrosservice.controller
 
-import com.example.postmicrosservice.model.PostBuilder
 import com.example.postmicrosservice.model.MediaBuilder
-import com.example.postmicrosservice.model.AuthorBuilder
-import com.example.postmicrosservice.service.PostService
-import com.example.postmicrosservice.service.MediaService
+import com.example.postmicrosservice.model.PostBuilder
 import com.example.postmicrosservice.service.AuthorService
+import com.example.postmicrosservice.service.MediaService
+import com.example.postmicrosservice.service.PostService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -62,9 +61,9 @@ class PostControllerTest {
     }
 
     @Test
-    fun `should get a post`(){
+    fun `should get a post`() {
         val post = PostBuilder().build()
-        
+
         Mockito.`when`(postService.getPost(post.id)).thenReturn(post)
 
         postController.get(post.id)
@@ -73,27 +72,31 @@ class PostControllerTest {
     }
 
     @Test
-    fun `should get all media by postId`(){
+    fun `should get all media by postId`() {
         var id = Random.nextLong()
 
-         val medias = listOf(MediaBuilder().apply {
-            postId = id
-         }.build())
+        val medias = listOf(
+            MediaBuilder().apply {
+                postId = id
+            }.build()
+        )
 
-         Mockito.`when`(mediaService.getPostByMedia(id)).thenReturn(medias)
+        Mockito.`when`(mediaService.getPostByMedia(id)).thenReturn(medias)
 
-         postController.getMediaByPost(id)
+        postController.getMediaByPost(id)
 
-         Mockito.verify(mediaService, Mockito.times(1)).getPostByMedia(id)
+        Mockito.verify(mediaService, Mockito.times(1)).getPostByMedia(id)
     }
 
     @Test
-    fun `should get all posts by author`(){
+    fun `should get all posts by author`() {
         var id = Random.nextLong()
 
-        val posts = listOf(PostBuilder().apply {
-            id = id
-        }.build())
+        val posts = listOf(
+            PostBuilder().apply {
+                id = id
+            }.build()
+        )
 
         Mockito.`when`(authorService.getPostByAuthor(id)).thenReturn(posts)
 

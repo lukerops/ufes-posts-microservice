@@ -1,7 +1,7 @@
 package com.example.postmicrosservice.repository
 
-import com.example.postmicrosservice.model.Post
 import com.example.postmicrosservice.model.Author
+import com.example.postmicrosservice.model.Post
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

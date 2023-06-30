@@ -1,7 +1,6 @@
 package com.example.postmicrosservice.service
 
 import com.example.postmicrosservice.model.Media
-import com.example.postmicrosservice.repository.AuthorRepository
 import com.example.postmicrosservice.repository.MediaRepository
 import org.springframework.stereotype.Service
 

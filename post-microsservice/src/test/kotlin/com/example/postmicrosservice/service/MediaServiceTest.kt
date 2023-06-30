@@ -1,12 +1,8 @@
 package com.example.postmicrosservice.service
 
-import com.example.postmicrosservice.model.Post
-import com.example.postmicrosservice.model.PostBuilder
-import com.example.postmicrosservice.model.Media
 import com.example.postmicrosservice.model.MediaBuilder
-import com.example.postmicrosservice.repository.PostRepository
 import com.example.postmicrosservice.repository.MediaRepository
-import com.example.postmicrosservice.service.MediaService
+import com.example.postmicrosservice.repository.PostRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -47,7 +43,7 @@ class MediaServiceTest {
 
         Assertions.assertTrue(output != null)
         Assertions.assertEquals(output, medias)
-    }    
+    }
 
     @Test
     fun `should return null when not found a post by mediaId`() {

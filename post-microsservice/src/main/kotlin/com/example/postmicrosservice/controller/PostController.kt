@@ -1,10 +1,10 @@
 package com.example.postmicrosservice.controller
 
-import com.example.postmicrosservice.model.Post
 import com.example.postmicrosservice.model.Media
-import com.example.postmicrosservice.service.PostService
+import com.example.postmicrosservice.model.Post
 import com.example.postmicrosservice.service.AuthorService
 import com.example.postmicrosservice.service.MediaService
+import com.example.postmicrosservice.service.PostService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -32,13 +32,21 @@ class PostController(
     @GetMapping("/author/{author}")
     fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<List<Post>> {
         val data = authorService.getPostByAuthor(authorId)
-        return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+        return if (data != null) {
+            ResponseEntity.ok(data)
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
 
     @GetMapping("/media/{id}")
     fun getMediaByPost(@PathVariable id: Long): ResponseEntity<List<Media>> {
         val data = mediaService.getPostByMedia(id)
-        return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+        return if (data != null) {
+            ResponseEntity.ok(data)
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
 
     @PostMapping("/create")
