@@ -1,0 +1,45 @@
+name: Push
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código-fonte
+      uses: actions/checkout@v2
+
+    - name: Configurar o ambiente Java
+      uses: actions/setup-java@v2.4.0
+      with:
+        java-version: '17'
+
+    - name: Configurar o ambiente Kotlin
+      uses: actions/setup-kotlin@v1
+
+    - name: Executar os testes
+      run: |
+        ./gradlew test
+# Alterar o build quando terminar o dockerfile
+  build:
+      needs: test
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout do código-fonte
+        uses: actions/checkout@v2
+
+      - name: Configurar o ambiente Java
+        uses: actions/setup-java@v2.4.0
+        with:
+          java-version: '17'
+
+      - name: Configurar o ambiente Kotlin
+        uses: actions/setup-kotlin@v1
+
+      - name: Fazer o build
+        run: |
+          ./gradlew build
