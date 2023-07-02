@@ -23,6 +23,11 @@ class PostController(
     private val authorService: AuthorService,
     private val mediaService: MediaService
 ) {
+    @GetMapping
+    fun getAllPosts(): ResponseEntity<List<Post>> {
+        return ResponseEntity.ok(postService.getAllPosts())
+    }
+
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long): ResponseEntity<Post> {
         val data = postService.getPost(id)
@@ -52,7 +57,7 @@ class PostController(
     @PostMapping("/create")
     fun create(@RequestBody post: Post): ResponseEntity<String> {
         postService.createPost(post)
-        return ResponseEntity<String>("Post updated", HttpStatus.CREATED)
+        return ResponseEntity<String>("Post created", HttpStatus.CREATED)
     }
 
     @PutMapping("/update")
