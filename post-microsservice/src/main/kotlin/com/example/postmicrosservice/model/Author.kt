@@ -12,4 +12,3 @@ data class Author(
     val postId: Long = 0,
     val authorId: Long = 0
 )
-
