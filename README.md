@@ -9,11 +9,12 @@ API criada na disciplina de microserviços.
  - MySQL DB
 
 ## To run locally:
-- On `post-microsservice` folder, run `./gradlew bootRun`
+- On `post-microsservice` folder, run `make run`
+- The application will start on `localhost:8081`
 
 ## How to Build
  - Clone the Repository
- - On `post-microsservice` folder, run `./gradlew build`
+ - On `post-microsservice` folder, run `make build`
  - Wait for Gradlew to download all dependencies and build the project
      - It may take a long time on first time
  - It's all set up!
