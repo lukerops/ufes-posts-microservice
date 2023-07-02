@@ -1,5 +1,6 @@
 package com.example.postmicrosservice.model
 
+import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
@@ -12,5 +13,7 @@ data class Post(
     val name: String = "",
     val title: String = "",
     val content: String = "",
-    val author: String = ""
+    val author: Long = 0,
+    @ElementCollection
+    val medias: List<Long> = listOf()
 )

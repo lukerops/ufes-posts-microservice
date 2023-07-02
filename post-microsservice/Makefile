@@ -1,5 +1,5 @@
 build:
 	./gradlew build
 
-run: build
+run:
 	docker-compose build && docker-compose up

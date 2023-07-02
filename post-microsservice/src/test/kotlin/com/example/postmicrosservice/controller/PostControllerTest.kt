@@ -35,11 +35,11 @@ class PostControllerTest {
     fun `should create a post`() {
         val post = PostBuilder().build()
 
-        Mockito.`when`(postService.createPost(post)).thenReturn(post)
+        Mockito.`when`(postService.savePost(post)).thenReturn(post)
 
         postController.create(post)
 
-        Mockito.verify(postService, Mockito.times(1)).createPost(post)
+        Mockito.verify(postService, Mockito.times(1)).savePost(post)
     }
 
     @Test
@@ -48,7 +48,7 @@ class PostControllerTest {
 
         Mockito.`when`(postService.updatePost(post)).thenReturn(true)
 
-        postController.update(post)
+        postController.update(post.id, post)
 
         Mockito.verify(postService, Mockito.times(1)).updatePost(post)
     }
@@ -85,11 +85,11 @@ class PostControllerTest {
             }.build()
         )
 
-        Mockito.`when`(mediaService.getPostByMedia(id)).thenReturn(medias)
+        Mockito.`when`(mediaService.getMediaByPostId(id)).thenReturn(medias)
 
         postController.getMediaByPost(id)
 
-        Mockito.verify(mediaService, Mockito.times(1)).getPostByMedia(id)
+        Mockito.verify(mediaService, Mockito.times(1)).getMediaByPostId(id)
     }
 
 //    @Test

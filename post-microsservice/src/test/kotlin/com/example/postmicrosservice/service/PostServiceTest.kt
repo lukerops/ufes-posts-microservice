@@ -18,6 +18,12 @@ class PostServiceTest {
     @Mock
     private lateinit var postRepository: PostRepository
 
+    @Mock
+    private lateinit var mediaService: MediaService
+
+    @Mock
+    private lateinit var authorService: AuthorService
+
     @InjectMocks
     private lateinit var postService: PostService
 
@@ -80,6 +86,7 @@ class PostServiceTest {
         val post = PostBuilder().build()
 
         Mockito.`when`(postRepository.save(post)).thenReturn(post)
+        Mockito.`when`(mediaService.saveAllMedias(listOf(), post.id)).then { }
 
         val output = postService.savePost(post)
 

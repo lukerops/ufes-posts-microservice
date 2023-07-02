@@ -43,9 +43,8 @@ class MediaRepositoryTest {
 
         var output = mediaRepository.findByMediaId(id)
 
-        Assertions.assertEquals(1, output.size)
-        Assertions.assertEquals(media.mediaId, output.first().mediaId)
-        Assertions.assertEquals(media.postId, output.first().postId)
+        Assertions.assertEquals(media.mediaId, output?.mediaId)
+        Assertions.assertEquals(media.postId, output?.postId)
     }
 
     @Test
@@ -59,7 +58,8 @@ class MediaRepositoryTest {
 
         var output = mediaRepository.findByPostId(id)
 
-        Assertions.assertEquals(media.mediaId, output?.mediaId)
-        Assertions.assertEquals(media.postId, output?.postId)
+        Assertions.assertEquals(1, output.size)
+        Assertions.assertEquals(media.mediaId, output.first().mediaId)
+        Assertions.assertEquals(media.postId, output.first().postId)
     }
 }
