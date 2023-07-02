@@ -24,4 +24,4 @@ jobs:
 
       - name: Fazer o build # Somente faz o build, sem teste.
         run: |
-          cd post-microsservice && ./gradlew build -x test
+          cd post-microsservice && ./gradlew build
