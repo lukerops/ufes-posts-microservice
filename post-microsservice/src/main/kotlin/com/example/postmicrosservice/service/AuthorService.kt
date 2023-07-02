@@ -1,7 +1,6 @@
 package com.example.postmicrosservice.service
 
 import com.example.postmicrosservice.model.Author
-import com.example.postmicrosservice.model.Post
 import com.example.postmicrosservice.repository.AuthorRepository
 import org.springframework.stereotype.Service
 
@@ -21,9 +20,6 @@ class AuthorService(
 
     fun getAuthorByPostId(id: Long): Author? =
         authorRepository.findByPostId(id)
-
-    fun getPostByAuthor(id: Long): List<Post> =
-        authorRepository.findPostByAuthorId(id)
 
     fun getAllAuthors(): List<Author> =
         authorRepository.findAll().toList()

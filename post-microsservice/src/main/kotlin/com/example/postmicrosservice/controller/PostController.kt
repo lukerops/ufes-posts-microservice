@@ -29,20 +29,20 @@ class PostController(
         return data?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
     }
 
-    @GetMapping("/author/{author}")
-    fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<List<Post>> {
-        val data = authorService.getPostByAuthor(authorId)
-        return if (data != null) {
-            ResponseEntity.ok(data)
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
+//    @GetMapping("/author/{author}")
+//    fun getPostByAuthor(@PathVariable authorId: Long): ResponseEntity<List<Post>> {
+//        val data = postService.getPostByAuthor(authorId)
+//        return if (data.isNotEmpty()) {
+//            ResponseEntity.ok(data)
+//        } else {
+//            ResponseEntity.notFound().build()
+//        }
+//    }
 
     @GetMapping("/media/{id}")
     fun getMediaByPost(@PathVariable id: Long): ResponseEntity<List<Media>> {
         val data = mediaService.getPostByMedia(id)
-        return if (data != null) {
+        return if (data.isNotEmpty()) {
             ResponseEntity.ok(data)
         } else {
             ResponseEntity.notFound().build()
