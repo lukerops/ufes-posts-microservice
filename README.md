@@ -4,36 +4,36 @@ API criada na disciplina de microserviços.
 ## API Endpoints
 
 ### Create Post
-**Method:** POST
-**Endpoint:** `/posts`
-**Body:**
-```json
-{
+  **Method:** POST  
+  **Endpoint:** `/posts`  
+  **Body:**  
+  ```json
+  {
 	"name": "example",
 	"title": "example",
 	"content": "text",
 	"author": 0,
 	"medias": [1, 2, 3]
-}
-```
-###  
-### Access all Posts
-**Method:** GET
-**Endpoint:** `/posts`
-
-
+  }
+  ```
 ###   
+### Access all Posts
+  **Method:** GET  
+  **Endpoint:** `/posts`  
+
+
+###    
 ### Access Post
-**Method:** GET
-**Endpoint:** `/posts/{id}`
+  **Method:** GET    
+  **Endpoint:** `/posts/{id}`  
 
 
-###  
+###    
 ### Edit Post
-**Method:** PUT
-**Endpoint:** `/posts/{id}/update`
- - OBS: Only include the data you want to modify
-```json
+  **Method:** PUT  
+  **Endpoint:** `/posts/{id}/update`  
+   - OBS: Only include the data you want to modify  
+  ```json
 {
 	"name": "example",
 	"title": "example",
@@ -41,25 +41,25 @@ API criada na disciplina de microserviços.
 	"author": 0,
 	"medias": [1, 2, 3]
 }
-```
+  ```
 
 
 ###    
 ### Delete Post
-**Method:** DELETE
-**Endpoint:** `/post/{id}`
+  **Method:** DELETE  
+  **Endpoint:** `/post/{id}`  
 
 
-###  
+###    
 ### Access Post by Author
-**Method:** GET
-**Endpoint:** `/post/author/{id}`
+  **Method:** GET  
+  **Endpoint:** `/post/author/{id}`  
 
 
-###  
+###    
 ### Access Media Ids by Post
-**Method:** GET
-**Endpoint:** `/post/{id}/media`
+  **Method:** GET  
+  **Endpoint:** `/post/{id}/media`  
 
 
 ## Dependencies
