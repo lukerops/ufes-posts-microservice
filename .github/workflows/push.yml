@@ -46,11 +46,11 @@ jobs:
       
       - name: Push DB container
         run: |
-          docker push post-microsservice_app_1
+          docker push post-microsservice_db
 
       - name: Push App container
         run: |
-          post-microsservice_db_1
+          post-microsservice_app
 
       - name: Stop and remove Docker containers
         run: docker-compose down
