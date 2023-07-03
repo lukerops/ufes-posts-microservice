@@ -13,7 +13,7 @@ RUN apt-get update -y && \
 COPY . .
 
 # Build the Kotlin/Spring Boot project
-RUN ./gradlew build
+RUN ./gradlew build --stacktrace
 
 # Expose the port on which the Spring Boot application will run
 EXPOSE 8080
