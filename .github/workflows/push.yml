@@ -1,15 +1,15 @@
-name: Push
+name: Pipeline de Merge
 
 on:
-  pull_request:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-# Alterar o build quando terminar o dockerfile
-  build:
-      runs-on: ubuntu-latest
-
-      steps:
+  tests:
+    name: Roda os Testes
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout do código-fonte
         uses: actions/checkout@v2
 
@@ -22,6 +22,29 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Fazer o build # Somente faz o build, sem teste.
+      - name: Fazer o teste
         run: |
-          cd post-microsservice && make build
+          cd post-microsservice && ./gradlew test
+
+  build:
+    name: Executa um processo de build
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Checkout do código-fonte
+        uses: actions/checkout@v2
+
+      - name: Login no Docker registry
+        run: echo "${{secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Construir a imagem Docker
+        run: docker-compose build -t "ghcr.io/lukerops/ufes-posts-microservice:latest" -f docker-compose.yml .
+
+      - name: Listar imagens Docker
+        run: docker images
+
+      - name: Executar o contêiner Docker
+        run: docker run "ghcr.io/lukerops/ufes-posts-microservice:latest"
+
+      - name: Publicar a imagem Docker
+        run: docker push "ghcr.io/lukerops/ufes-posts-microservice:latest"
