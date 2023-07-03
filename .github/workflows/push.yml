@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    name: Roda os Testes
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código-fonte
@@ -27,7 +27,7 @@ jobs:
           cd post-microsservice && ./gradlew test
 
   build:
-    name: Executa um processo de build
+    name: Building
     runs-on: ubuntu-latest
     needs: tests
     steps:
@@ -44,7 +44,7 @@ jobs:
         run: docker images
 
       - name: Executar o contêiner Docker
-        run: docker run "ghcr.io/lukerops/ufes-posts-microservice:latest"
+        run: docker run ghcr.io/lukerops/ufes-posts-microservice:latest
 
       - name: Publicar a imagem Docker
         run: docker push "ghcr.io/lukerops/ufes-posts-microservice:latest"
