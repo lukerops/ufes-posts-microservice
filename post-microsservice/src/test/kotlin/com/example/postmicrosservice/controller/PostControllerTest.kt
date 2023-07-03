@@ -47,11 +47,11 @@ class PostControllerTest {
         val post = PostBuilder().build()
         val id = post.id
 
-        Mockito.`when`(postService.updatePost(id ,post)).thenReturn(true)
+        Mockito.`when`(postService.updatePost(id, post)).thenReturn(true)
 
         postController.update(post.id, post)
 
-        Mockito.verify(postService, Mockito.times(1)).updatePost(id ,post)
+        Mockito.verify(postService, Mockito.times(1)).updatePost(id, post)
     }
 
     @Test
