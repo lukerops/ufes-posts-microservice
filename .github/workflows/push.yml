@@ -43,14 +43,8 @@ jobs:
 
       - name: Listar imagens
         run: docker images
-      
-      - name: Push DB container
-        run: |
-          docker push post-microsservice_db
 
       - name: Push App container
         run: |
           post-microsservice_app
-
-      - name: Stop and remove Docker containers
-        run: docker-compose down
+          
