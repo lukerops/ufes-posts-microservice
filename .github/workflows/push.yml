@@ -37,14 +37,18 @@ jobs:
       - name: Login no Docker registry
         run: echo "${{secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Construir a imagem Docker
-        run: docker-compose build -t "ghcr.io/lukerops/ufes-posts-microservice:latest" -f docker-compose.yml .
+      - name: Construir e rodar a imagem Docker
+        run: |
+          docker-compose build
+          docker-compose up -d
+      
+      - name: Push DB container
+        run: |
+          docker push post-microsservice_app_1
 
-      - name: Listar imagens Docker
-        run: docker images
+      - name: Push App container
+        run: |
+          post-microsservice_db_1
 
-      - name: Executar o contêiner Docker
-        run: docker run ghcr.io/lukerops/ufes-posts-microservice:latest
-
-      - name: Publicar a imagem Docker
-        run: docker push "ghcr.io/lukerops/ufes-posts-microservice:latest"
+      - name: Stop and remove Docker containers
+        run: docker-compose down
