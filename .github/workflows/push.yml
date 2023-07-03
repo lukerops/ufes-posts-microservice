@@ -44,7 +44,3 @@ jobs:
       - name: Listar imagens
         run: docker images
 
-      - name: Push App container
-        run: |
-          docker push post-microsservice_app
-
