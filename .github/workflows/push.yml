@@ -37,9 +37,12 @@ jobs:
       - name: Login no Docker registry
         run: echo "${{secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Construir e rodar a imagem Docker
+      - name: Construir a imagem Docker
         run: |
-          docker-compose build
+          cd post-microsservice && docker-compose build
+
+      - name: Rodar a imagem Docker
+        run: |
           docker-compose up -d
       
       - name: Push DB container
