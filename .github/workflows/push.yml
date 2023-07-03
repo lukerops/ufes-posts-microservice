@@ -39,11 +39,7 @@ jobs:
 
       - name: Construir a imagem Docker
         run: |
-          cd post-microsservice && docker-compose build
-
-      - name: Rodar a imagem Docker
-        run: |
-          docker-compose up -d
+          cd post-microsservice && make run
       
       - name: Push DB container
         run: |
