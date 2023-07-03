@@ -32,9 +32,9 @@ class PostService(
     fun getAllPosts(): List<Post> =
         postRepository.findAll().toList()
 
-    fun updatePost(post: Post): Boolean {
-        if (postRepository.existsById(post.id)) {
-            val safePost = post.copy(id = post.id)
+    fun updatePost(id: Long, post: Post): Boolean {
+        if (postRepository.existsById(id)) {
+            val safePost = post.copy(id = id)
             savePost(safePost)
             return true
         }

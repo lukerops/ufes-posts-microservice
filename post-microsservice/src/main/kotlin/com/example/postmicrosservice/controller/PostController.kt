@@ -65,7 +65,7 @@ class PostController(
 
     @PutMapping("/{id}/update")
     fun update(@PathVariable id: Long, @RequestBody post: Post): ResponseEntity<String> {
-        return if (postService.updatePost(post)) {
+        return if (postService.updatePost(id, post)) {
             ResponseEntity<String>("Post Updated", HttpStatus.OK)
         } else {
             ResponseEntity<String>("Update failed", HttpStatus.BAD_REQUEST)
