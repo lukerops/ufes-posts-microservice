@@ -31,7 +31,7 @@ API criada na disciplina de microserviços.
 ###    
 ### Edit Post
   **Method:** PUT  
-  **Endpoint:** `/posts/{id}/update`  
+  **Endpoint:** `/posts/{id}`  
    - OBS: Only include the data you want to modify  
   ```json
 {
