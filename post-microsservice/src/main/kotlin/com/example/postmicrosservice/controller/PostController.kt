@@ -63,7 +63,7 @@ class PostController(
         return ResponseEntity<String>("Post created", HttpStatus.CREATED)
     }
 
-    @PutMapping("/{id}/update")
+    @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody post: Post): ResponseEntity<String> {
         return if (postService.updatePost(id, post)) {
             ResponseEntity<String>("Post Updated", HttpStatus.OK)
