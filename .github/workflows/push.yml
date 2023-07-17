@@ -39,7 +39,11 @@ jobs:
 
       - name: Construir a imagem Docker
         run: |
-          cd post-microsservice && make build
+          cd post-microsservice
+          
+      - run: docker build -t "ghcr.io/lukerops/ufes-posts-microservice:latest" -f Dockerfile .
+      - run: docker images
+      - run: docker push "ghcr.io/lukerops/ufes-posts-microservice:latest"
 
       - name: Listar imagens
         run: docker images
