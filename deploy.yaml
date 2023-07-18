@@ -102,6 +102,9 @@ spec:
           limits:
             cpu: 500m
             memory: 512Mi
+        env:
+        - name: DB_URL
+          value: jdbc:mysql://posts-mysql.ufes.svc.cluster.local:3306/posts
         ports:
         - containerPort: 8081
           name: http
