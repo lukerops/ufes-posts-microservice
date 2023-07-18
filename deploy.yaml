@@ -1,0 +1,160 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: posts-mysql-data
+  namespace: ufes
+spec:
+  storageClassName: standard-rwx
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  posts-mysql
+  namespace: ufes
+  labels:
+    app:  posts-mysql
+spec:
+  selector:
+    matchLabels:
+      app: posts-mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  posts-mysql
+    spec:
+      containers:
+      - name:  posts-mysql
+        image:  mysql:8.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: posts
+        - name: MYSQL_USER
+          value: post_microsservice
+        - name: MYSQL_PASSWORD
+          value: password
+        ports:
+        - containerPort:  80
+          name:  posts-mysql
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: posts-mysql-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-mysql
+  namespace: ufes
+spec:
+  selector:
+    app: posts-mysql
+  type: ClusterIP
+  ports:
+  - name: posts-mysql
+    protocol: TCP
+    port: 3306
+    targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  posts
+  namespace: ufes
+  labels:
+    app:  posts
+spec:
+  selector:
+    matchLabels:
+      app: posts
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  posts
+    spec:
+      containers:
+      - name:  posts
+        image:  ghcr.io/lukerops/ufes-posts-microservice:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+        - containerPort: 8081
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts
+  namespace: ufes
+spec:
+  selector:
+    app: posts
+  type: ClusterIP
+  ports:
+  - name: posts
+    protocol: TCP
+    port: 8081
+    targetPort: 8081
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: posts-ufes-tls
+  namespace: ufes
+spec:
+  secretName: posts-ufes-tls-certificate
+  issuerRef:
+    kind: ClusterIssuer
+    name: ybatinga
+  dnsNames:
+    - posts-ufes.ybatinga.com.br
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: posts
+  namespace: ufes
+spec:
+  ingressClassName: ybatinga-ingress
+  rules:
+  - host: posts-ufes.ybatinga.com.br
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: posts
+            port:
+              number: 8081
+  tls:
+    - hosts:
+      - posts-ufes.ybatinga.com.br
+      secretName: posts-ufes-tls-certificate
+---
+
