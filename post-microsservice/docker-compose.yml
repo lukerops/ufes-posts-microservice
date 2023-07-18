@@ -16,6 +16,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - DB_URL=jdbc:mysql://db:3306/posts
     ports:
       - 8081:8081
     depends_on:
